@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Property Information Report</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Montserrat, Arial, sans-serif; color: #2f3b45; background: #fff; padding: 24px; max-width: 620px; margin: 0 auto; font-size: 13px; line-height: 1.5; }
+  .header { background: #005E9C; color: white; padding: 16px 20px; border-radius: 8px; margin-bottom: 20px; }
+  .header h1 { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+  .header p { font-size: 12px; opacity: 0.85; }
+  .status-bar { background: #f0f6fb; border: 1px solid #d0e4f0; border-radius: 6px; padding: 8px 12px; margin-bottom: 16px; font-size: 12px; color: #4a5560; }
+  .section { border: 1px solid #e6e9ed; border-radius: 8px; margin-bottom: 14px; overflow: hidden; }
+  .section-header { background: #f8fafc; border-bottom: 1px solid #e6e9ed; padding: 8px 12px; }
+  .section-header h2 { font-size: 13px; font-weight: 700; color: #005E9C; }
+  .section-body { padding: 10px 12px; }
+  .row { margin-bottom: 5px; font-size: 13px; }
+  .row:last-child { margin-bottom: 0; }
+  .row strong { color: #2f3b45; }
+  a { color: #005E9C; text-decoration: none; }
+  .print-btn { display: inline-block; margin: 20px 0 8px; background: #005E9C; color: white; border: none; padding: 9px 22px; border-radius: 999px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: Montserrat, Arial, sans-serif; }
+  .footer { margin-top: 16px; font-size: 11px; color: #999; text-align: center; border-top: 1px solid #e6e9ed; padding-top: 12px; }
+  .not-city { background: #fff5f5; border: 1px solid #fbd5d0; border-radius: 8px; padding: 14px; color: #b42318; font-weight: 700; font-size: 14px; margin-bottom: 16px; }
+  @media print {
+    .print-btn { display: none; }
+    body { padding: 12px; }
+    .header { border-radius: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .section-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1 id="address-title">Property Information Report</h1>
+  <p>City of Salisbury · Generated <span id="date"></span></p>
+</div>
+
+<div id="not-city-msg" class="not-city" style="display:none;">
+  This address is not within the City Limits.
+</div>
+
+<div id="city-content" style="display:none;">
+
+  <div class="status-bar" id="city-status"></div>
+
+  <div class="section">
+    <div class="section-header"><h2>City Council</h2></div>
+    <div class="section-body">
+      <div class="row"><strong>District:</strong> <span id="district"></span></div>
+      <div class="row"><strong>Representative:</strong> <span id="rep"></span></div>
+      <div class="row"><strong>Email:</strong> <a id="email" href=""></a></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><h2>Programs &amp; Incentives</h2></div>
+    <div class="section-body">
+      <div class="row" id="opportunity"></div>
+      <div class="row" id="historic"></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><h2>City Services &amp; Homeowner Info</h2></div>
+    <div class="section-body">
+      <div class="row"><strong>Trash and Recycling:</strong> <span id="trash"></span></div>
+      <div class="row"><strong>Floodplain:</strong> <span id="floodplain"></span></div>
+      <div class="row"><strong>Critical Area:</strong> <span id="critical"></span></div>
+      <div class="row"><strong>Zoning:</strong> <span id="zoning"></span></div>
+      <div class="row"><strong>Police Sector:</strong> <span id="police"></span></div>
+      <div class="row"><strong>First Due:</strong> <span id="firstdue"></span></div>
+      <div class="row"><strong>ZIP Code:</strong> <span id="zip"></span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><h2>Parcel Information</h2></div>
+    <div class="section-body">
+      <div class="row"><strong>Parcel ID:</strong> <span id="parcelid"></span></div>
+      <div class="row" id="sdat-row"><strong>SDAT Webpage:</strong> <a id="sdat" href="" target="_blank">View Property Records Here</a></div>
+    </div>
+  </div>
+
+</div>
+
+<button class="print-btn" onclick="window.print()">🖨 Print this page</button>
+
+<div class="footer">City of Salisbury · Property Information Report · <span id="date2"></span></div>
+
+<script>
+function p(name) {
+  var raw = (new URLSearchParams(window.location.search)).get(name) || '';
+  return decodeURIComponent(raw.replace(/\+/g, ' '));
+}
+
+var today = new Date().toLocaleDateString('en-US', {year:'numeric', month:'long', day:'numeric'});
+document.getElementById('date').textContent = today;
+document.getElementById('date2').textContent = today;
+
+var inCity = p('incity');
+
+if (inCity === 'yes') {
+  document.getElementById('city-content').style.display = 'block';
+
+  var addr = p('addr');
+  if (addr) { document.getElementById('address-title').textContent = addr; }
+
+  document.getElementById('city-status').textContent = p('citystatus');
+  document.getElementById('district').textContent = p('district');
+  document.getElementById('rep').textContent = p('rep');
+
+  var email = p('email');
+  var emailEl = document.getElementById('email');
+  emailEl.textContent = email;
+  emailEl.href = 'mailto:' + email;
+
+  document.getElementById('opportunity').textContent = p('opportunity');
+  document.getElementById('historic').textContent = p('historic');
+  document.getElementById('trash').textContent = p('trash');
+  document.getElementById('floodplain').textContent = p('floodplain');
+  document.getElementById('critical').textContent = p('critical');
+  document.getElementById('zoning').textContent = p('zoning');
+  document.getElementById('police').textContent = p('police');
+  document.getElementById('firstdue').textContent = p('firstdue');
+  document.getElementById('zip').textContent = p('zip');
+  document.getElementById('parcelid').textContent = p('parcelid');
+
+  var sdat = p('sdat');
+  if (sdat) {
+    document.getElementById('sdat').href = sdat;
+  } else {
+    document.getElementById('sdat-row').style.display = 'none';
+  }
+
+} else {
+  document.getElementById('not-city-msg').style.display = 'block';
+}
+</script>
+</body>
+</html>

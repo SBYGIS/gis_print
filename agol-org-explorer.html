@@ -1083,6 +1083,7 @@ const DEFAULT_CLIENT_ID = '';  // ← paste your Salisbury Client ID here once y
 let state = {
   token: null,
   orgUrl: null,
+  orgId: null,
   username: null,
   isAdmin: false,
   allItems: [],
@@ -1165,6 +1166,7 @@ async function agolGet(path, params = {}) {
 async function loadOrgInfo() {
   const info = await agolGet('/portals/self');
   state.username = info.user?.username || 'unknown';
+  state.orgId = info.id;
   state.isAdmin = info.user?.role === 'org_admin' ||
                   info.user?.roleId === 'org_admin' ||
                   (info.user?.privileges || []).includes('portal:admin:viewUsers');
@@ -1177,6 +1179,7 @@ async function loadOrgInfo() {
 
 async function loadAllItems() {
   setLoading(true, 'Loading org items...');
+
   let start = 1, pageSize = 100, all = [];
   const types = [
     'Feature Service', 'Map Service', 'Image Service', 'Vector Tile Service',
@@ -1187,7 +1190,7 @@ async function loadAllItems() {
 
   while (true) {
     const r = await agolGet('/search', {
-      q: `(${typeQ})`,
+      q: `(${typeQ}) AND orgid:${state.orgId}`,
       num: pageSize,
       start,
       sortField: 'title',

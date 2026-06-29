@@ -10,11 +10,10 @@
   .header { background: #004676; color: white; padding: 16px 20px; border-radius: 8px; margin-bottom: 20px; }
   .header h1 { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
   .header p { font-size: 12px; opacity: 0.85; }
-  .status-bar { background: #f0f6fb; border: 1px solid #d0e4f0; border-radius: 6px; padding: 8px 12px; margin-bottom: 16px; font-size: 12px; color: #4a5560; }
+  .status-bar { background: #f0f6fb; border: 1px solid #d0e4f0; border-radius: 6px; padding: 8px 12px; margin-bottom: 16px; font-size: 12px; color: #4a5560; text-align: center; }
   .section { border: 1px solid #e6e9ed; border-radius: 8px; margin-bottom: 14px; overflow: hidden; }
   .section-header { background: #f8fafc; border-bottom: 1px solid #e6e9ed; padding: 8px 12px; }
   .section-header h2 { font-size: 13px; font-weight: 700; color: #004676; }
-  .section-subheader { font-size: 12px; font-weight: 700; color: #004676; margin: 10px 0 6px; border-bottom: 1px solid #e6e9ed; padding-bottom: 4px; }
   .section-body { padding: 10px 12px; }
   .row { margin-bottom: 5px; font-size: 13px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
   .row:last-child { margin-bottom: 0; }
@@ -22,13 +21,10 @@
   .row strong { color: #2f3b45; flex: 0 0 140px; }
   .row span { text-align: right; flex: 1; }
   .row a { color: #004676; text-decoration: none; }
-  .party-badge { display: inline-block; background: #c0392b; color: white; font-size: 9px; font-weight: 700; padding: 2px 8px; border-radius: 10px; margin-left: 6px; }
-  .party-badge.dem { background: #1a5276; }
-  .district-value { color: #004676; font-weight: 700; }
-  .note { font-size: 11px; color: #888; margin-top: 8px; padding-top: 8px; border-top: 1px solid #e6e9ed; line-height: 1.5; }
   .print-btn { display: inline-block; margin: 20px 0 8px; background: #004676; color: white; border: none; padding: 9px 22px; border-radius: 999px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: Montserrat, Arial, sans-serif; }
   .footer { margin-top: 16px; font-size: 11px; color: #999; text-align: center; border-top: 1px solid #e6e9ed; padding-top: 12px; }
-  .not-city { background: #fff5f5; border: 1px solid #fbd5d0; border-radius: 8px; padding: 14px; color: #b42318; font-weight: 700; font-size: 14px; margin-bottom: 16px; }
+  .not-city { background: #fff5f5; border: 1px solid #fbd5d0; border-radius: 8px; padding: 14px; color: #b42318; font-weight: 700; font-size: 14px; margin-bottom: 16px; text-align: center; }
+  .parcel-chip { display: inline-block; background: #eef3f8; border: 1px solid #cdd9e5; border-radius: 6px; padding: 3px 10px; font-family: Consolas, Menlo, Monaco, monospace; font-size: 13px; color: #2f3b45; letter-spacing: 0.02em; }
   @media print {
     .print-btn { display: none; }
     body { padding: 12px; }
@@ -65,50 +61,9 @@
   </div>
 
   <div class="section">
-    <div class="section-header"><h2>Election Information</h2></div>
-    <div class="section-body">
-      
-      <div class="section-subheader">Your Districts</div>
-      <div class="row"><strong>U.S. Congress</strong> <span class="district-value" id="congress"></span></div>
-      <div class="row alt"><strong>MD Legislature</strong> <span class="district-value" id="legdist"></span></div>
-      <div class="row"><strong>County Council</strong> <span class="district-value" id="councildist"></span></div>
-      <div class="row alt"><strong>School Board</strong> <span class="district-value" id="schooldist"></span></div>
-      <div class="row"><strong>Precinct</strong> <span class="district-value" id="precinct"></span></div>
-
-      <div class="section-subheader">Federal</div>
-      <div class="row"><strong>President</strong> <span id="president"></span></div>
-      <div class="row alt"><strong>U.S. Representative</strong> <span id="usrep"></span></div>
-      <div class="row"><strong>U.S. Senator</strong> <span id="senator1"></span></div>
-      <div class="row alt"><strong>U.S. Senator</strong> <span id="senator2"></span></div>
-
-      <div class="section-subheader">State</div>
-      <div class="row"><strong>State Senator</strong> <span id="statesen"></span></div>
-      <div class="row alt"><strong>Delegate</strong> <span id="delegate1"></span></div>
-      <div class="row"><strong>Delegate</strong> <span id="delegate2"></span></div>
-
-      <div class="section-subheader">Wicomico County</div>
-      <div class="row alt"><strong>County Executive</strong> <span id="countyexec"></span></div>
-      <div class="row"><strong>County Council*</strong> <span id="councilmember"></span></div>
-      <div class="row alt"><strong>Board of Education*</strong> <span id="boardmember"></span></div>
-      <div class="row"><strong>Board of Ed (At-Large)</strong> <span id="atlarge"></span></div>
-      
-      <div class="note" id="redistricting-note"></div>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="section-header"><h2>Programs &amp; Incentives</h2></div>
-    <div class="section-body">
-      <div class="row"><strong>Opportunity Zone</strong> <span id="opportunity"></span></div>
-      <div class="row alt"><strong>Enterprise Zone</strong> <span id="enterprise"></span></div>
-      <div class="row"><strong>Historic District</strong> <span id="historic"></span></div>
-    </div>
-  </div>
-
-  <div class="section">
     <div class="section-header"><h2>City Services &amp; Homeowner Info</h2></div>
     <div class="section-body">
-      <div class="row"><strong>Trash and Recycling</strong> <span id="trash"></span></div>
+      <div class="row"><strong>Trash &amp; Recycling</strong> <span id="trash" style="color:#004676;font-weight:700;"></span></div>
       <div class="row alt"><strong>Floodplain</strong> <span id="floodplain"></span></div>
       <div class="row"><strong>Critical Area</strong> <span id="critical"></span></div>
       <div class="row alt"><strong>Zoning</strong> <span id="zoning"></span></div>
@@ -121,8 +76,17 @@
   <div class="section">
     <div class="section-header"><h2>Parcel Information</h2></div>
     <div class="section-body">
-      <div class="row"><strong>Parcel ID</strong> <span id="parcelid"></span></div>
+      <div class="row"><strong>Parcel ID</strong> <span id="parcelid" class="parcel-chip"></span></div>
       <div class="row alt" id="sdat-row"><strong>SDAT Webpage</strong> <a id="sdat" href="" target="_blank">View Property Records</a></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><h2>Programs &amp; Incentives</h2></div>
+    <div class="section-body">
+      <div class="row"><strong>Opportunity Zone</strong> <span id="opportunity"></span></div>
+      <div class="row alt"><strong>Enterprise Zone</strong> <span id="enterprise"></span></div>
+      <div class="row"><strong>Historic District</strong> <span id="historic"></span></div>
     </div>
   </div>
 
@@ -162,41 +126,21 @@ if (inCity === 'yes') {
   document.getElementById('pollinglocation').textContent = p('pollinglocation');
   document.getElementById('pollingaddr').textContent = p('pollingaddr');
 
-  // Election info
-  document.getElementById('congress').textContent = p('congress') || '—';
-  document.getElementById('legdist').textContent = p('legdist') || '—';
-  document.getElementById('councildist').textContent = p('councildist') || '—';
-  document.getElementById('schooldist').textContent = p('schooldist') || '—';
-  document.getElementById('precinct').textContent = p('precinct') || '—';
-  
-  document.getElementById('president').textContent = p('president') || 'Donald J. Trump';
-  document.getElementById('usrep').textContent = p('usrep') || '—';
-  document.getElementById('senator1').textContent = p('senator1') || '—';
-  document.getElementById('senator2').textContent = p('senator2') || '—';
-  
-  document.getElementById('statesen').textContent = p('statesen') || '—';
-  document.getElementById('delegate1').textContent = p('delegate1') || '—';
-  document.getElementById('delegate2').textContent = p('delegate2') || '—';
-  
-  document.getElementById('countyexec').textContent = p('countyexec') || 'Julie Giordano';
-  document.getElementById('councilmember').textContent = p('councilmember') || '—';
-  document.getElementById('boardmember').textContent = p('boardmember') || '—';
-  document.getElementById('atlarge').textContent = p('atlarge') || 'Dr. Bonnie H. Ennis, Kristin N. Hazel, John Palmer';
-  
-  var redNote = p('redistricting');
-  if (redNote) {
-    document.getElementById('redistricting-note').textContent = redNote;
-  }
-
-  // Programs
-  document.getElementById('opportunity').textContent = p('opportunity');
-  document.getElementById('enterprise').textContent = p('enterprise');
-  document.getElementById('historic').textContent = p('historic');
-
   // Services
   document.getElementById('trash').textContent = p('trash');
-  document.getElementById('floodplain').textContent = p('floodplain');
-  document.getElementById('critical').textContent = p('critical');
+
+  var floodplain = p('floodplain');
+  var floodEl = document.getElementById('floodplain');
+  floodEl.textContent = floodplain;
+  if (floodplain === 'Yes (FEMA)') { floodEl.style.color = '#b45309'; floodEl.style.fontWeight = '700'; }
+  else { floodEl.style.color = '#888'; }
+
+  var critical = p('critical');
+  var critEl = document.getElementById('critical');
+  critEl.textContent = critical;
+  if (critical === 'Yes') { critEl.style.color = '#b45309'; critEl.style.fontWeight = '700'; }
+  else { critEl.style.color = '#888'; }
+
   document.getElementById('zoning').textContent = p('zoning');
   document.getElementById('police').textContent = p('police');
   document.getElementById('firstdue').textContent = p('firstdue');
@@ -210,6 +154,25 @@ if (inCity === 'yes') {
   } else {
     document.getElementById('sdat-row').style.display = 'none';
   }
+
+  // Programs
+  var opp = p('opportunity');
+  var oppEl = document.getElementById('opportunity');
+  oppEl.textContent = opp;
+  if (opp === 'Yes') { oppEl.style.color = '#004676'; oppEl.style.fontWeight = '700'; }
+  else { oppEl.style.color = '#888'; }
+
+  var ent = p('enterprise');
+  var entEl = document.getElementById('enterprise');
+  entEl.textContent = ent;
+  if (ent === 'Yes') { entEl.style.color = '#004676'; entEl.style.fontWeight = '700'; }
+  else { entEl.style.color = '#888'; }
+
+  var hist = p('historic');
+  var histEl = document.getElementById('historic');
+  histEl.textContent = hist;
+  if (hist !== 'No' && hist !== '') { histEl.style.color = '#004676'; histEl.style.fontWeight = '700'; }
+  else { histEl.style.color = '#888'; }
 
 } else {
   document.getElementById('not-city-msg').style.display = 'block';

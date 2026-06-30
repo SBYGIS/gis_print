@@ -59,7 +59,15 @@
       <div class="row"><strong>Polling Address</strong> <span id="pollingaddr"></span></div>
     </div>
   </div>
-
+<div class="section">
+  <div class="section-header"><h2>Political Districts</h2></div>
+  <div class="section-body">
+    <div class="row"><strong>Congressional District</strong> <span id="congdistrict"></span></div>
+    <div class="row alt"><strong>Legislative District</strong> <span id="legdistrict"></span></div>
+    <div class="row"><strong>Precinct</strong> <span id="precinct"></span></div>
+    <div class="row alt"><strong>County Council District</strong> <span id="councildistrict"></span></div>
+  </div>
+</div>
   <div class="section">
     <div class="section-header"><h2>City Services &amp; Homeowner Info</h2></div>
     <div class="section-body">
@@ -125,6 +133,10 @@ if (inCity === 'yes') {
 
   document.getElementById('pollinglocation').textContent = p('pollinglocation');
   document.getElementById('pollingaddr').textContent = p('pollingaddr');
+ document.getElementById('congdistrict').textContent = p('congdistrict');
+document.getElementById('legdistrict').textContent = p('legdistrict');
+document.getElementById('precinct').textContent = p('precinct');
+document.getElementById('councildistrict').textContent = p('councildistrict');
 
   // Services
   document.getElementById('trash').textContent = p('trash');
